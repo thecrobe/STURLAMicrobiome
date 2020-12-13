@@ -114,4 +114,12 @@ cor.melt<-melt(cor.matrix)
 ggplot(cor.melt, aes(x=cor.melt$variable, cor.melt$Correlation, fill=cor.melt$value)) +geom_tile() + scale_fill_continuous(type = "viridis") +theme(panel.border = element_blank(), panel.grid.major = element_blank(), panel.grid.minor = element_blank(), axis.line = element_line(colour = "black")) 
 
 
+#Mantel Test
+sturla<-read.csv(file="./Data/sturla_full.csv", header=T, row.names = 1)
+sturla.bray<-vegdist(t(sturla))
 
+unifrac.nosub<-read.csv(file = "Data/undistance-matrix-nosubway.csv",header = T, row.names = 1)
+
+dim(sturla.bray)
+set.seed(3)
+mantel(sturla.bray,unifrac.nosub)

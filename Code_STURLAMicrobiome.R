@@ -53,3 +53,65 @@ ggplot(data.frame(fd),aes(x=Axis.1, y=Axis.2, shape=Air.Type, color=Type)) + geo
         panel.grid.minor = element_blank(), axis.line = element_line(colour = "black")) +  theme(axis.text = element_text(angle = 90)) 
 
 
+#Sturla Class Distributions
+sturla<-read.csv(file="Data/STURLA_Mean_Class.csv", header=T)
+sturla$Class<-factor(sturla$Class, levels = sturla$Class)
+
+ggplot(sturla, aes(x=sturla$Class, y=sturla$Mean, fill=sturla$Class)) +geom_bar(stat="identity")  + theme_bw(base_size = 20) + scale_color_manual(values=c("#A0D694", "#9359DB", "#CC6553", "#475E7F", "#EDA4DD","#D8B461","")) +theme(panel.border = element_blank(), panel.grid.major = element_blank(), panel.grid.minor = element_blank(), axis.line = element_line(colour = "black")) +theme(axis.text = element_text(angle = 90)) 
+
+#STURLA Correlations
+data<-read.csv("Data/STURLA_CORR.csv", header=T,row.names = 1)
+cor(data,data,method="spearman") # correlation matrix
+
+library(RVAideMemoire)
+perm.cor.test(data$Function_Shannon,data$tgpl)
+perm.cor.test(data$Function_Shannon,data$tgplm)
+perm.cor.test(data$Function_Shannon,data$tgp)
+perm.cor.test(data$Function_Shannon,data$tgwp)
+perm.cor.test(data$Function_Shannon,data$tgbp)
+perm.cor.test(data$Function_Shannon,data$tgbpl)
+perm.cor.test(data$Function_Shannon,data$tgplmh)
+perm.cor.test(data$Function_Shannon,data$tgwpl)
+perm.cor.test(data$Function_Shannon,data$twpm)
+perm.cor.test(data$Function_Shannon,data$other)
+
+perm.cor.test(data$Phylogenetic,data$tgpl)
+perm.cor.test(data$Phylogenetic,data$tgplm)
+perm.cor.test(data$Phylogenetic,data$tgp)
+perm.cor.test(data$Phylogenetic,data$tgwp)
+perm.cor.test(data$Phylogenetic,data$tgbp)
+perm.cor.test(data$Phylogenetic,data$tgbpl)
+perm.cor.test(data$Phylogenetic,data$tgplmh)
+perm.cor.test(data$Phylogenetic,data$tgwpl)
+perm.cor.test(data$Phylogenetic,data$twpm)
+perm.cor.test(data$Phylogenetic,data$other)
+
+perm.cor.test(data$Observed,data$tgpl)
+perm.cor.test(data$Observed,data$tgplm)
+perm.cor.test(data$Observed,data$tgp)
+perm.cor.test(data$Observed,data$tgwp)
+perm.cor.test(data$Observed,data$tgbp)
+perm.cor.test(data$Observed,data$tgbpl)
+perm.cor.test(data$Observed,data$tgplmh)
+perm.cor.test(data$Observed,data$tgwpl)
+perm.cor.test(data$Observed,data$twpm)
+perm.cor.test(data$Observed,data$other)
+
+perm.cor.test(data$Pielou.s.Evenness,data$tgpl)
+perm.cor.test(data$Pielou.s.Evenness,data$tgplm)
+perm.cor.test(data$Pielou.s.Evenness,data$tgp)
+perm.cor.test(data$Pielou.s.Evenness,data$tgwp)
+perm.cor.test(data$Pielou.s.Evenness,data$tgbp)
+perm.cor.test(data$Pielou.s.Evenness,data$tgbpl)
+perm.cor.test(data$Pielou.s.Evenness,data$tgplmh)
+perm.cor.test(data$Pielou.s.Evenness,data$tgwpl)
+perm.cor.test(data$Pielou.s.Evenness,data$twpm)
+perm.cor.test(data$Pielou.s.Evenness,data$other)
+
+cor.matrix<-read.csv(file = "Data/sturladivcorrelationrho.csv")
+cor.melt<-melt(cor.matrix)
+
+ggplot(cor.melt, aes(x=cor.melt$variable, cor.melt$Correlation, fill=cor.melt$value)) +geom_tile() + scale_fill_continuous(type = "viridis") +theme(panel.border = element_blank(), panel.grid.major = element_blank(), panel.grid.minor = element_blank(), axis.line = element_line(colour = "black")) 
+
+
+
